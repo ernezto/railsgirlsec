@@ -9,3 +9,16 @@ rails new railsgirls
 cd railsgirls
 rails server
 <CTRL> - c
+```
+
+Abrir en un navegador la página [http://localhost:3000](http://localhost:3000)
+
+## Paso 2: Creación del modelo Idea
+```bash
+rails generate scaffold idea name:string description:text picture:string
+bin/rake db:migrate
+rails server
+<CTRL> - c
+```
+
+Abrir en un navegador la página [http://localhost:3000/ideas](http://localhost:3000/ideas)
