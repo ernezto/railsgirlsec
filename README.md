@@ -22,3 +22,6 @@ rails server
 ```
 
 Abrir en un navegador la página [http://localhost:3000/ideas](http://localhost:3000/ideas)
+
+## Paso 3: Primeros estilos con Twitter Bootstrap
+Ver la Guía Paso 3. Design [enlace](http://guides.railsgirls.com/app/)
