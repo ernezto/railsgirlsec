@@ -22,7 +22,12 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/ideas">Ideas</a></li>
+          <li class="<%= 'active' if current_page?(ideas_path) %>">
+            <%= link_to 'Ideas', ideas_path %>
+          </li>
+          <li class="<%= 'active' if current_page?(pages_info_path) %>">
+            <%= link_to '¿Quién soy?', pages_info_path %>
+          </li>
         </ul>
       </div>
     </div>

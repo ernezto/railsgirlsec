@@ -34,3 +34,15 @@ Editar el archivo config/routes.rb agregando la siguiente línea al principio
 ```ruby
 root :to => redirect('/ideas')
 ```
+
+## Paso 6: Creando página estática de información
+Editar el archivo config/routes.rb agregando la siguiente línea al principio
+
+```bash
+rails generate controller pages info
+```
+Verificar que en el archivo de rutas se encuentre la línea
+
+```ruby
+get "pages/info"
+```
