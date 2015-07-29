@@ -19,6 +19,10 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/edit
   def edit
+    @idea = current_user.ideas.find_by_id(params[:id])
+    if @idea.nil?
+      redirect_to ideas_path, flash: {alert: 'No existe la idea que desea modificar'}
+    end
   end
 
   # POST /ideas
@@ -41,6 +45,7 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1
   # PATCH/PUT /ideas/1.json
   def update
+    @idea = current_user.ideas.find(params[:id])
     respond_to do |format|
       if @idea.update(idea_params)
         format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }

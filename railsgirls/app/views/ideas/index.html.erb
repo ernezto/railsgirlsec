@@ -18,8 +18,13 @@
         <td><%= idea.description %></td>
         <td><%= idea.picture %></td>
         <td><%= link_to 'Show', idea %></td>
-        <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
-        <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.ideas.include? idea %>
+          <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
+          <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
