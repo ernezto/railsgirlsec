@@ -49,3 +49,29 @@ get "pages/info"
 
 ## Paso 7: Creando autenticación básica
 Ver la Guía 5. Add authentication with devise [enlace](http://guides.railsgirls.com/devise/)
+
+## Paso 8: Asignando usuarios al modelo de ideas
+Editar el archivo app/models/idea.rb y agregar la relación con usuario. (note el uso del singular en el nombre del modelo)
+
+```ruby
+belongs_to :user
+```
+
+Editar el archivo app/models/user.rb y agregar la relación con usuario (note el uso del plurar en el nombre del modelo)
+
+```ruby
+has_many :ideas
+```
+
+Escribir en la consola
+
+```bash
+rails g  migration AddUserToIdeas user_id:integer
+rake db:migrate
+```
+
+Editar el controlador de ideas app/controllers/ideas_controller.rb y agregar lo siguiente en el metodo create justo debado de la línea @idea = Idea.new(idea_params)
+
+```ruby
+@idea.user = current_user
+```
