@@ -46,3 +46,6 @@ Verificar que en el archivo de rutas se encuentre la línea
 ```ruby
 get "pages/info"
 ```
+
+## Paso 7: Creando autenticación básica
+Ver la Guía 5. Add authentication with devise [enlace](http://guides.railsgirls.com/devise/)
