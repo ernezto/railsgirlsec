@@ -28,3 +28,9 @@ Ver la Guía Paso 3. Design [enlace](http://guides.railsgirls.com/app/)
 
 ## Paso 4: Soporte para subir imágenes
 Ver la Guía Paso 4. Adding picture uploads [enlace](http://guides.railsgirls.com/app/)
+
+## Paso 5: Modificación de la ruta raíz
+Editar el archivo config/routes.rb agregando la siguiente línea al principio
+```ruby
+root :to => redirect('/ideas')
+```
