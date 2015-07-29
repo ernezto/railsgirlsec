@@ -29,11 +29,26 @@
             <%= link_to '¿Quién soy?', pages_info_path %>
           </li>
         </ul>
+        <p class="navbar-text pull-right">
+        <% if user_signed_in? %>
+          Hola <strong><%= current_user.email %> !</strong>.
+          <%= link_to 'Editar perfil', edit_user_registration_path, :class => 'navbar-link' %> |
+          <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+        <% else %>
+          <%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %> |
+          <%= link_to "Iniciar sesión", new_user_session_path, :class => 'navbar-link'  %>
+        <% end %>
       </div>
     </div>
   </nav>
 
   <div class="container">
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </div>
 
