@@ -28,6 +28,9 @@
           <li class="<%= 'active' if current_page?(pages_info_path) %>">
             <%= link_to '¿Quién soy?', pages_info_path %>
           </li>
+          <li class="<%= 'active' if current_page?(new_idea_path) %>">
+            <%= link_to 'Nueva Idea', new_idea_path %>
+          </li>
         </ul>
         <p class="navbar-text pull-right">
         <% if user_signed_in? %>

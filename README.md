@@ -75,3 +75,13 @@ Editar el controlador de ideas app/controllers/ideas_controller.rb y agregar lo 
 ```ruby
 @idea.user = current_user
 ```
+
+## Paso 9: Permitiendo la modificación de las ideas solo a sus propietarios
+
+## Paso 10: Mejorando el html y el css de la interfaz de usuario
+Para modificar las vistas de devise ejecutar el comando
+
+```bash
+rails g  devise:views
+rm -rf app/views/devise/confirmations app/views/devise/mailer app/views/devise/shared app/views/devise/unlocks
+```
