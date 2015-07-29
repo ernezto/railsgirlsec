@@ -36,7 +36,7 @@ root :to => redirect('/ideas')
 ```
 
 ## Paso 6: Creando página estática de información
-Editar el archivo config/routes.rb agregando la siguiente línea al principio
+Ejecutar el siguiente comando en la consola
 
 ```bash
 rails generate controller pages info
