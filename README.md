@@ -85,3 +85,58 @@ Para modificar las vistas de devise ejecutar el comando
 rails g  devise:views
 rm -rf app/views/devise/confirmations app/views/devise/mailer app/views/devise/shared app/views/devise/unlocks
 ```
+
+## Paso 11: Agregando comentarios a las ideas
+Abrir el archivo Gemfile y agregar la gema
+
+```ruby
+gem 'commontator', '~> 4.10.0'
+```
+
+```bash
+bundle install
+rake commontator:install
+rake db:migrate
+```
+
+Editar el archivo config/initializers/commontator.rb cambiando la línea 39 donde dice
+
+```ruby
+config.user_name_proc = lambda { |user| I18n.t('commontator.anonymous') }
+```
+
+Por:
+
+```ruby
+config.user_name_proc = lambda { |user| user.email }
+```
+
+Editar el archivo config/routes.rb agregando la siguiente línea antes de 'end':
+
+```ruby
+mount Commontator::Engine => '/commontator'
+```
+
+Editar el archivo app/models/user.rb agregando la siguiente línea antes de 'end':
+
+```ruby
+acts_as_commontator
+```
+
+Editar el archivo app/models/idea.rb agregando la siguiente línea antes de 'end':
+
+```ruby
+acts_as_commontable
+```
+
+Editar el archivo app/views/ideas/show.html.erb agregando la siguiente al final del archivo
+
+```ruby
+<%= commontator_thread(@idea) %>
+```
+
+Editar el archivo app/controllers/ideas_controller.rb agregando la siguiente dentro del método show
+
+```ruby
+commontator_thread_show(@idea)
+```
