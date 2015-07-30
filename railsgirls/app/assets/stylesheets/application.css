@@ -18,3 +18,26 @@ body { padding-top: 60px; }
 footer { margin-top: 100px; }
 table, td, th { vertical-align: middle; border: none; }
 th { border-bottom: 1px solid #DDD; }
+
+
+.votes-container a{
+  text-decoration: none !important;
+  color: #aaa;
+}
+.blue{
+  color: #1c6fec;
+  font-weight: bold;
+}
+.red{
+  color: #e9252b;
+  font-weight: bold;
+}
+
+.grid-image-container{
+  height: 150px;
+}
+
+.grid-image{
+  width: 150px;
+  max-height: 150px;
+}

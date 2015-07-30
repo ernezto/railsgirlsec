@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :ideas
   acts_as_commontator
+  acts_as_voter
 end
