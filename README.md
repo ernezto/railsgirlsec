@@ -77,6 +77,39 @@ Editar el controlador de ideas app/controllers/ideas_controller.rb y agregar lo 
 ```
 
 ## Paso 9: Permitiendo la modificación de las ideas solo a sus propietarios
+Para permitir la edición solo a los propietarios de las ideas se debe editar el controlador app/controllers/ideas_controller.rb. Reemplazar la definición del método edit con el siguiente código
+
+```ruby
+def edit
+  @idea = current_user.ideas.find_by_id(params[:id])
+  if @idea.nil?
+  redirect_to ideas_path, flash: {alert: 'No existe la idea que desea modificar'}
+  end
+end
+```
+
+En este caso estamos cargando la idea con el identificador que se envía como parte del parámetro de la URL desde la lista de las ideas del usuario autenticado usando el helper de 'devise' current_user. Por tanto si la idea no se encuentra en la lista de las ideas que fueron creadas por el usuario autenticado se redirecciona a la página del listado de ideas mostrando un mensaje de alerta.
+
+A continuación agregamos la siguiente línea justo debajo de la definción del método update
+
+```ruby
+...
+def update
+  @idea = current_user.ideas.find(params[:id])
+...
+```
+
+Para finalizar modificamos el html contenido en la vista del listado app/views/ideas/index.html.erb para solo mostrar los enlaces de editar y eliminar solo si el usuario es el propietario de la idea
+
+```html
+<% if current_user.ideas.include? idea %>
+<td><%= link_to 'Edit', edit_idea_path(idea) %></td>
+<td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% else %>
+<td></td>
+<td></td>
+<% end %>
+```
 
 ## Paso 10: Mejorando el html y el css de la interfaz de usuario
 Para modificar las vistas de devise ejecutar el comando
