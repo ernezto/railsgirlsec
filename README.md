@@ -168,7 +168,7 @@ Primero sustitimos la vista para cambiar las credenciales app/views/devise/passw
 </div>
 ```
 
-Note el uso de los estilos de bootstrap en las etiquetas html div y en los generadores de rails, tales como: <div class="col-md-5">, <div class="form-group">, class: 'btn btn-default', class: 'form-control'
+Note el uso de los estilos de bootstrap en las etiquetas html div y en los generadores de rails, tales como: `<div class="col-md-5">`, `<div class="form-group">`, `class: 'btn btn-default'`, `class: 'form-control'`
 
 Luego sustituimos el contenido de la vista para recordar las credenciales app/views/devise/passwords/new.html.erb con el siguiente contenido:
 
@@ -192,7 +192,7 @@ Luego sustituimos el contenido de la vista para recordar las credenciales app/vi
 </div>
 ```
 
-Seguimos sustituyendo las vistas de devise como sigue a continuacion:
+Seguimos sustituyendo las vistas de devise como sigue a continuación:
 
 archivo: app/views/devise/registrations/edit.html.erb
 
