@@ -90,6 +90,19 @@ end
 
 En este caso estamos cargando la idea con el identificador que se envía como parte del parámetro de la URL desde la lista de las ideas del usuario autenticado usando el helper de 'devise' current_user. Por tanto si la idea no se encuentra en la lista de las ideas que fueron creadas por el usuario autenticado se redirecciona a la página del listado de ideas mostrando un mensaje de alerta.
 
+Ahora al crear una nueva idea debemos asignarle el usuario actual como propietario, para ello modificamos el metodo create y colocamos la siguiente línea 
+
+```ruby
+@idea.user = current_user
+```
+
+justo debajo del siguiente código:
+
+```ruby
+def create
+    @idea = Idea.new(idea_params)
+```
+
 A continuación agregamos la siguiente línea justo debajo de la definción del método update
 
 ```ruby
