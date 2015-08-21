@@ -99,8 +99,10 @@ Ahora al crear una nueva idea debemos asignarle el usuario actual como propietar
 justo debajo del siguiente código:
 
 ```ruby
+...
 def create
     @idea = Idea.new(idea_params)
+...
 ```
 
 A continuación agregamos la siguiente línea justo debajo de la definción del método update
