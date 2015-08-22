@@ -635,33 +635,33 @@ Editar la vista del listado de ideas app/views/ideas/index.html.erb y sustituir:
 Por:
 
 ```html
-+<% @ideas.in_groups_of(6) do |group| %>
+<% @ideas.in_groups_of(6) do |group| %>
    <div class="row">
      <% group.compact.each do |idea| %>
-+      <div class="col-md-2">
-+        <%= link_to idea do %>
-+          <div class="grid-image-container">
-+            <%= image_tag idea.picture_url, class: 'img-thumbnail grid-image' if idea.picture.present?%>
-+          </div>
-+        <% end %>
-+        <h4>
-+          <%= link_to idea.name, idea %>
-+          <small class="pull-right votes-container">
-+            <%= link_to like_idea_path(idea), method: :put do %>
-+              <span class="<%= current_user.voted_up_on?(idea) ? "selected blue" : "" %> votes">
-+                <%= idea.get_upvotes.size %>
-+                <span class="glyphicon glyphicon-arrow-up"></span>
-+              </span>
-+            <% end %>
-+            <%= link_to dislike_idea_path(idea), method: :put do %>
-+              <span class="<%= current_user.voted_down_on?(idea) ? "red" : "" %> votes">
-+                <%= idea.get_downvotes.size %>
-+                <span class="glyphicon glyphicon-arrow-down"></span>
-+              </span>
-+            <% end %>
-+          </small>
-+        </h4>
-+        <p>
-+          <%= idea.description %>
-+        </p>
+      <div class="col-md-2">
+        <%= link_to idea do %>
+          <div class="grid-image-container">
+            <%= image_tag idea.picture_url, class: 'img-thumbnail grid-image' if idea.picture.present?%>
+          </div>
+        <% end %>
+        <h4>
+          <%= link_to idea.name, idea %>
+          <small class="pull-right votes-container">
+            <%= link_to like_idea_path(idea), method: :put do %>
+              <span class="<%= current_user.voted_up_on?(idea) ? "selected blue" : "" %> votes">
+                <%= idea.get_upvotes.size %>
+                <span class="glyphicon glyphicon-arrow-up"></span>
+              </span>
+            <% end %>
+            <%= link_to dislike_idea_path(idea), method: :put do %>
+              <span class="<%= current_user.voted_down_on?(idea) ? "red" : "" %> votes">
+                <%= idea.get_downvotes.size %>
+                <span class="glyphicon glyphicon-arrow-down"></span>
+              </span>
+            <% end %>
+          </small>
+        </h4>
+        <p>
+          <%= idea.description %>
+        </p>
 ```
