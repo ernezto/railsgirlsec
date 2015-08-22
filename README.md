@@ -556,18 +556,6 @@ rails generate acts_as_votable:migration
 rake db:migrate
 ```
 
-Editar el archivo config/initializers/commontator.rb cambiando la línea 39 donde dice
-
-```ruby
-config.user_name_proc = lambda { |user| I18n.t('commontator.anonymous') }
-```
-
-Por:
-
-```ruby
-config.user_name_proc = lambda { |user| user.email }
-```
-
 Editar el archivo config/routes.rb sustituyendo la línea `resources :ideas` por:
 
 ```ruby
