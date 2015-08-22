@@ -568,32 +568,112 @@ Por:
 config.user_name_proc = lambda { |user| user.email }
 ```
 
-Editar el archivo config/routes.rb agregando la siguiente línea antes de 'end':
+Editar el archivo config/routes.rb sustituyendo la línea `resources :ideas` por:
 
 ```ruby
-mount Commontator::Engine => '/commontator'
+ resources :ideas do
+   member do
+     put 'like', to: 'ideas#upvote'
+     put 'dislike', to: 'ideas#downvote'
+   end
+ end
 ```
 
 Editar el archivo app/models/user.rb agregando la siguiente línea antes de 'end':
 
 ```ruby
-acts_as_commontator
+acts_as_voter
 ```
 
 Editar el archivo app/models/idea.rb agregando la siguiente línea antes de 'end':
 
 ```ruby
-acts_as_commontable
+acts_as_votable
 ```
 
-Editar el archivo app/views/ideas/show.html.erb agregando la siguiente al final del archivo
+Editar el archivo app/assets/stylesheets/application.css agregando los siguientes estilos al final del archivo
 
-```ruby
-<%= commontator_thread(@idea) %>
+```css
+.votes-container a{
+  text-decoration: none !important;
+  color: #aaa;
+}
+.blue{
+  color: #1c6fec;
+  font-weight: bold;
+}
+.red{
+  color: #e9252b;
+  font-weight: bold;
+}
+
+.grid-image-container{
+  height: 150px;
+}
+
+.grid-image{
+  width: 150px;
+  max-height: 150px;
+}
 ```
 
-Editar el archivo app/controllers/ideas_controller.rb agregando la siguiente dentro del método show
+Editar el archivo app/controllers/ideas_controller.rb agregando los siguientes metodos:
 
 ```ruby
-commontator_thread_show(@idea)
+  def upvote
+    @idea = Idea.find(params[:id])
+    @idea.upvote_by current_user
+    redirect_to ideas_path
+  end
+
+  def downvote
+    @idea = Idea.find(params[:id])
+    @idea.downvote_by current_user
+    redirect_to ideas_path
+  end
+```
+
+Editar la vista del listado de ideas app/views/ideas/index.html.erb y sustituir:
+
+```html
+<% @ideas.in_groups_of(3) do |group| %>
+   <div class="row">
+     <% group.compact.each do |idea| %>
+      <div class="col-md-4">
+        <%= image_tag idea.picture_url, class: 'img-thumbnail' if idea.picture.present?%>
+        <h4><%= link_to idea.name, idea %></h4>
+        <%= idea.description %>
+```
+Por:
+
+```html
++<% @ideas.in_groups_of(6) do |group| %>
+   <div class="row">
+     <% group.compact.each do |idea| %>
++      <div class="col-md-2">
++        <%= link_to idea do %>
++          <div class="grid-image-container">
++            <%= image_tag idea.picture_url, class: 'img-thumbnail grid-image' if idea.picture.present?%>
++          </div>
++        <% end %>
++        <h4>
++          <%= link_to idea.name, idea %>
++          <small class="pull-right votes-container">
++            <%= link_to like_idea_path(idea), method: :put do %>
++              <span class="<%= current_user.voted_up_on?(idea) ? "selected blue" : "" %> votes">
++                <%= idea.get_upvotes.size %>
++                <span class="glyphicon glyphicon-arrow-up"></span>
++              </span>
++            <% end %>
++            <%= link_to dislike_idea_path(idea), method: :put do %>
++              <span class="<%= current_user.voted_down_on?(idea) ? "red" : "" %> votes">
++                <%= idea.get_downvotes.size %>
++                <span class="glyphicon glyphicon-arrow-down"></span>
++              </span>
++            <% end %>
++          </small>
++        </h4>
++        <p>
++          <%= idea.description %>
++        </p>
 ```
